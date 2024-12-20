@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Card } from 'primereact/card';
 import LoginForm from '../components/LoginForm';
 import { login } from '../services/authService';
@@ -6,6 +7,8 @@ import { login } from '../services/authService';
 const LoginPage = () => {
     const [loading, setLoading] = useState(false);
     const [errorMessage, setErrorMessage] = useState('');
+
+    const navigate = useNavigate();
 
     const handleLoginSubmit = (username: string, password: string) => {
         setLoading(true);
@@ -17,7 +20,8 @@ const LoginPage = () => {
             password,
             (data) => {
                 console.log('Login successful:', data);
-                alert('Login successful!');
+                // alert('Login successful!');
+                navigate('/');
                 setLoading(false); // Dừng loading khi thành công
             },
             (error) => {
